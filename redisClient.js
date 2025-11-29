@@ -4,8 +4,13 @@ let client;
 
 const initRedis = async () => {
     if (process.env.REDIS_URL) {
+        let redisUrl = process.env.REDIS_URL;
+        if (redisUrl.startsWith('redis://')) {
+            redisUrl = redisUrl.replace('redis://', 'rediss://');
+        }
+
         client = redis.createClient({
-            url: process.env.REDIS_URL,
+            url: redisUrl,
             socket: {
                 tls: true,
                 rejectUnauthorized: false
