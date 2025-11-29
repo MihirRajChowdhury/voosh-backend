@@ -68,6 +68,11 @@ app.post('/api/session', (req, res) => {
   res.json({ sessionId });
 });
 
+// Health Check
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // Chat Endpoint
 app.post('/api/chat', async (req, res) => {
   const { sessionId, message } = req.body;
