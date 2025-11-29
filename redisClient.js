@@ -5,7 +5,11 @@ let client;
 const initRedis = async () => {
     if (process.env.REDIS_URL) {
         client = redis.createClient({
-            url: process.env.REDIS_URL
+            url: process.env.REDIS_URL,
+            socket: {
+                tls: true,                // Required for Upstash
+                rejectUnauthorized: false // Sometimes needed on cloud hosts
+            }
         });
 
         client.on('error', (err) => console.log('Redis Client Error', err));
