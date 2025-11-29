@@ -5,8 +5,8 @@ const fs = require('fs');
 let db = null;
 let table = null;
 
-const DB_DIR = path.join(__dirname, '/tmp/lancedb');
-
+// const DB_DIR = path.join(__dirname, '.lancedb'); // for local
+    const DB_DIR = '/tmp/lancedb';
 
 
 const initVectorStore = async () => {
