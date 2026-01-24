@@ -22,10 +22,21 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const chatModel = genAI.getGenerativeModel({
   model: "gemini-2.5-flash",
   systemInstruction: {
-    parts: [{ text: `You are a helpful news assistant. Answer based ONLY on context. Do NOT start your answer with "Based on the context provided" or similar phrases. Just answer the question directly.` }],
-    role: "model"
+    role: "model",
+    parts: [{
+      text: `
+You are a helpful assistant.
+
+If relevant context is provided, use it.
+If no context is provided, answer using your own general knowledge.
+Never respond with "no context available".
+Never mention whether context was or wasn’t provided.
+Just answer the question directly.
+      `
+    }]
   }
 });
+
 
 // Initialize System
 const initializeSystem = async () => {
